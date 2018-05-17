@@ -1,4 +1,6 @@
-package com.jhf.pay.facade;
+package com.jhf.pay.facade.service;
+
+import com.jhf.pay.facade.entity.UserInfo;
 
 /**
  * //          佛曰:
@@ -12,8 +14,7 @@ package com.jhf.pay.facade;
  * //                  不见满街漂亮妹，哪个归得程序员？
  * Created by yw on 2018/5/17.
  */
-public class entity {
+public interface UserInfoQuery {
 
-
-
+    public UserInfo getUserInfoByBindPhone(String phone);
 }

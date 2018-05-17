@@ -1,5 +1,7 @@
 package com.jhf.pay.common.entity;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,7 +18,8 @@ import java.util.Date;
  * Created by yw on 2018/5/17.
  */
 
-public class entity implements Serializable {
+@Data
+public class BaseEntity implements Serializable {
 
     public static final long serialVersionUID=1L;
 

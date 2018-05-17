@@ -6,6 +6,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>../pay-service-users</module>
+        <module>../pay-service-consume-test</module>
     </modules>
 
     <!--用户类-->
@@ -17,10 +18,23 @@
     </parent>
 
 
+
     <groupId>com.jhf.pay.facade</groupId>
     <artifactId>pay-facade-users</artifactId>
     <version>${pay-facade-users.version}</version>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.jhf.pay.common</groupId>
+            <artifactId>pay-common</artifactId>
+            <version>${pay-common.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 
 
