@@ -5,7 +5,7 @@
     <parent>
         <artifactId>pay-common-parent</artifactId>
         <groupId>com.jhf.pay.common</groupId>
-        <version>${pay-common-parent.version}</version>
+        <version>1.0-SNAPSHOT</version>
         <relativePath>../pay-common-parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -13,6 +13,7 @@
     <groupId>com.jhf.pay.common</groupId>
     <artifactId>pay-common</artifactId>
     <version>${pay-common.version}</version>
+    <packaging>jar</packaging>
 
   <dependencies>
         <dependency>
@@ -20,4 +21,43 @@
             <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
+
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <uniqueVersion>false</uniqueVersion>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!--compiler插件-->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                    <encoding>${file.encoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.1.2</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
