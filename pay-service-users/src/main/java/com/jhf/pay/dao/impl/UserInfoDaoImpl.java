@@ -1,8 +1,13 @@
-package com.jhf.pay.facade.service;
+package com.jhf.pay.dao.impl;
 
+import com.jhf.pay.common.framework.dao.BaseDaoImpl;
+import com.jhf.pay.dao.UserInfoDao;
 import com.jhf.pay.facade.entity.UserInfo;
+import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * //          佛曰:
@@ -14,13 +19,18 @@ import java.util.List;
  * //                  奔驰宝马贵者趣，公交自行程序员。
  * //                  别人笑我忒疯癫，我笑自己命太贱；
  * //                  不见满街漂亮妹，哪个归得程序员？
- * Created by yw on 2018/5/17.
+ * Created by yw on 2018/5/23.
  */
-public interface UserInfoQuery {
+@Repository("userInfoDao")
+public class UserInfoDaoImpl extends BaseDaoImpl<UserInfo> implements UserInfoDao {
 
-    public UserInfo getUserInfoByBindPhone(String phone);
+    @Override
+    public UserInfo findByPhone(String phone){
+        Map<String,Object> map = new HashMap<>();
+        map.put("phone",phone);
+        return super.getByParam(map);
+    }
 
-    public long addUserInfo(UserInfo userInfo);
 
-    public List<UserInfo> getByParam(String name);
+
 }

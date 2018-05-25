@@ -24,6 +24,7 @@ public class Consumer {
                 new ClassPathXmlApplicationContext(new String[]{"classpath:spring-context.xml"});
         UserQueryBiz biz = (UserQueryBiz) applicationContext.getBean("userQueryBiz");
         biz.doBiz();
+
         System.out.println("ok...");
 
     }

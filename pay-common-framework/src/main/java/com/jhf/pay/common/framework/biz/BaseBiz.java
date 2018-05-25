@@ -1,8 +1,9 @@
-package com.jhf.pay.facade.service;
+package com.jhf.pay.common.framework.biz;
 
-import com.jhf.pay.facade.entity.UserInfo;
+import com.jhf.pay.common.entity.BaseEntity;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * //          佛曰:
@@ -14,13 +15,19 @@ import java.util.List;
  * //                  奔驰宝马贵者趣，公交自行程序员。
  * //                  别人笑我忒疯癫，我笑自己命太贱；
  * //                  不见满街漂亮妹，哪个归得程序员？
- * Created by yw on 2018/5/17.
+ * Created by yw on 2018/5/23.
  */
-public interface UserInfoQuery {
+public interface BaseBiz<T extends BaseEntity>{
 
-    public UserInfo getUserInfoByBindPhone(String phone);
+    long create(T t);
 
-    public long addUserInfo(UserInfo userInfo);
+    long create(List<T> list);
+    long update(T entity);
+    long update(List<T> list);
+    long deleteById(long id);
+    T getById(long id);
+    List<T> getAll();
+    List<T> getListBy(Map<String,Object> map);
+    String getSeqNextValue(String seqName);
 
-    public List<UserInfo> getByParam(String name);
 }

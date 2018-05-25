@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.Date;
+
 /**
  * //          佛曰:
  * //                  写字楼里写字间，写字间里程序员；
@@ -25,9 +27,13 @@ public class UserInfo extends BaseEntity{
 
     private static final long serialVersionUID = 1L;
 
-    private String name;
+    private String userName;
     private String email;
     private String phone;
+    private Date createTime;
+    private String salt;
+    private int state;
+    private String password;
 
 
 }

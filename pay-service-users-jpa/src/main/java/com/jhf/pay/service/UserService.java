@@ -1,8 +1,10 @@
-package com.jhf.pay.facade.service;
+package com.jhf.pay.service;
 
 import com.jhf.pay.facade.entity.UserInfo;
+import com.jhf.pay.service.entity.User;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * //          佛曰:
@@ -14,13 +16,14 @@ import java.util.List;
  * //                  奔驰宝马贵者趣，公交自行程序员。
  * //                  别人笑我忒疯癫，我笑自己命太贱；
  * //                  不见满街漂亮妹，哪个归得程序员？
- * Created by yw on 2018/5/17.
+ * Created by yw on 2018/5/24.
  */
-public interface UserInfoQuery {
+public interface UserService {
 
-    public UserInfo getUserInfoByBindPhone(String phone);
+    User findById(long id);
 
-    public long addUserInfo(UserInfo userInfo);
+    User save(User user);
 
-    public List<UserInfo> getByParam(String name);
+    long batchSave(List<User> userList);
+
 }

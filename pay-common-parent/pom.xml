@@ -58,6 +58,7 @@
         <!--common-->
         <pay-common-config.version>1.0-SNAPSHOT</pay-common-config.version>
         <pay-common.version>1.0-SNAPSHOT</pay-common.version>
+        <pay-common-framework.version>1.0-SNAPSHOT</pay-common-framework.version>
         <!--facade-->
         <pay-facade-users.version>1.0-SNAPSHOT</pay-facade-users.version>
         <!--service-->
@@ -67,8 +68,12 @@
         <org.springframework.version>4.3.12.RELEASE</org.springframework.version>
 
         <jdk.version>1.8</jdk.version>
-
+        <mybatis-page.version>4.1.1</mybatis-page.version>
+        <mybatis-page-helper.version>4.1.6</mybatis-page-helper.version>
+        <alibaba-druid.version>1.0.29</alibaba-druid.version>
+        <hibernate.version>5.3.0.Final</hibernate.version>
     </properties>
+
 
 
     <!-- Spring Dependency Begin -->
@@ -183,8 +188,12 @@
         <artifactId>mybatis-spring</artifactId>
         <version>1.2.0</version>
     </dependency>
-    <!-- MyBatis Dependency End -->
-
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper</artifactId>
+                <version>${mybatis-page.version}</version>
+            </dependency>
+            <!-- MyBatis Dependency End -->
     <!-- Mysql Driver Begin -->
     <dependency>
         <groupId>mysql</groupId>
@@ -197,6 +206,11 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>dubbo</artifactId>
                 <version>2.5.3</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${alibaba-druid.version}</version>
             </dependency>
       <!--duboo End-->
             <dependency>
@@ -254,6 +268,37 @@
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
                 <version>1.7.5</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper</artifactId>
+                <version>${mybatis-page-helper.version}</version>
+            </dependency>
+
+            <!--SPRING DATA JPA    2.0对应spring5版本，4.3版本需要1.0版本-->
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-jpa</artifactId>
+                <version>1.11.9.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-ehcache -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+                <scope>test</scope>
             </dependency>
 
 

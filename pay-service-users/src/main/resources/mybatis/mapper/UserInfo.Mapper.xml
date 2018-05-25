@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhf.pay.dao.impl.UserInfoDaoImpl">
+
+	<sql id="table"> USER_INFO </sql>
+
+	<resultMap id="beanMap" type="UserInfo">
+		<id column="ID" property="id" />
+		<result column="NAME" property="name" />
+		<result column="CREATE_TIME" property="createTime" />
+		<result column="PASSWORD" property="password" />
+		<result column="phone" property="phone" />
+		<result column="salt" property="salt" />
+		<result column="state" property="state" />
+		<result column="VERSION" property="version" />
+
+	</resultMap>
+
+	<insert id="insert" parameterType="UserInfo" keyProperty="id" useGeneratedKeys="true">
+		insert into
+		<include refid="table" />
+		(VERSION, CREATE_TIME, user_name, password, phone, salt,
+		state)
+		values (0, #{createTime},#{userName}, #{password}, #{phone},
+		#{salt}, #{state})
+	</insert>
+
+	<!-- 更新:version+1 实现乐观锁 -->
+	<update id="update" parameterType="UserInfo">
+		update
+		<include refid="table" />
+		<set>
+			VERSION = #{version}+1 ,
+			userName = #{userName},
+			password = #{password},
+			phone = #{phone},
+			salt = #{salt},
+			state = #{state}
+		</set>
+		<where>
+			ID = #{id} and VERSION = #{version}
+		</where>
+	</update>
+
+	<select id="getById" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="table" />
+		where ID = #{id}
+	</select>
+
+	<select id="getList" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="table" />
+		where name=#{userName}
+	</select>
+
+
+	<select id="getParam" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="table" />
+		where 1=1
+		<include refid="condition_sql"/>
+	</select>
+
+
+	<sql id="condition_sql">
+		<if test="phone != null and phone !=''"> and phone = #{phone} </if>
+		<if test="password != null and password != ''"> and PASSWORD = #{password} </if>
+		<if test="userName != null and userName != ''"> and USER_NAME = #{userName} </if>
+		<if test="salt != null and salt != ''"> and SALT = #{salt} </if>
+		<if test="state != null and state != ''"> and state = #{state} </if>
+		<!--<if test="status != null and status != ''"> and STATUS = #{status} </if>
+		&lt;!&ndash; 此处foreach中的条件用于分页查询，要用${item},不用#{item} &ndash;&gt;
+		<if test="inStatus != null and inStatus != ''">
+			and STATUS in
+			<foreach item="item" index="index" collection="inStatus" open="(" separator="," close=")">${item}</foreach>
+		</if>
+		<if test="userType != null and userType != ''"> and USERTYPE = #{userType} </if>
+		<if test="bindMobileNo != null and bindMobileNo != ''"> and BINDMOBILENO = #{bindMobileNo} </if>
+		<if test="bindEmail != null and bindEmail != ''"> and BINDEMAIL = #{bindEmail} </if>
+		<if test="startDate != null and startDate != '' and endDate != '' and endDate != null">
+			and CREATETIME between #{beginDate} and CONCAT(#{endDate}, ' 23:59:59')
+		</if>
+		<if test="userNoKey != null and userNoKey != ''"> and USERNO LIKE CONCAT('%' ,CONCAT(#{userNoKey},'%')) </if>-->
+	</sql>
+
+	<!-- 根据多参数进行查询数据 -->
+	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="table" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		<![CDATA[ order by ID desc]]>
+	</select>
+
+	<select id="listBy" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="table" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+	<!-- 更新用户状态,并标记用户为已实名认证 -->
+	<update id="updateUserInfoStatusAndIsRealName" parameterType="java.util.Map">
+		update
+		<include refid="table" />
+		set STATUS = #{status}, ISREALNAMEAUTH = #{isRealNameAuth}
+		<where>
+			USERNO = #{userNo}
+		</where>
+	</update>
+	
+	<select id="likeBy" parameterType="java.util.Map" resultType="java.util.Map">
+		select USERNO as "code", USERNO as "name", REALNAME as "desc" from
+		<include refid="table" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+</mapper>

@@ -1,5 +1,7 @@
 package com.jhf.pay.service;
 
+import com.jhf.pay.common.framework.BooleanTypeHandler;
+import com.jhf.pay.facade.service.UserInfoQuery;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.IOException;
@@ -22,6 +24,10 @@ public class Provider {
         ClassPathXmlApplicationContext context =
                 new ClassPathXmlApplicationContext(new String[]{"spring/spring-context.xml"});
         context.start();
+        BooleanTypeHandler booleanTypeHandler = new BooleanTypeHandler();
+        System.out.println(booleanTypeHandler);
+        UserInfoQuery userInfoQuery = (UserInfoQuery) context.getBean("userInfoQuery");
+        userInfoQuery.getUserInfoByBindPhone("15800000001");
         System.out.println("start.....");
         System.in.read();
     }
